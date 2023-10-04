@@ -43,3 +43,12 @@
   height: auto;
 }
 
+body {
+  background-image: url('./images/Fondo(1).jpg'); /* Reemplaza con la ruta de tu imagen */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+

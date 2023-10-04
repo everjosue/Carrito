@@ -4,6 +4,7 @@ import Navegacion from './components/Navegacion';
 import Carrusel_Principal from './components/Carrusel_Principal';
 import ListDatosProductos from "./components/ListDatosProductos";
 import SearchResult from './components/SearchResult';
+import './App.css';
 
 import dataDatosProductos from './data/DatosProductos'; // Importa tus datos de productos
 

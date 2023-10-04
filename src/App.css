@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+/* En App.css */
+.carousel-image {
+  max-width: 100%;
+  height: auto;
+}
+

@@ -44,11 +44,10 @@
 }
 
 body {
-  background-image: url('./images/Fondo(1).jpg'); /* Reemplaza con la ruta de tu imagen */
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/public/images/Fondo(1).jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 100vh;
 }
-
 

@@ -13,10 +13,12 @@ function CardsProductos(props) {
 
   const [showFullDescription, setShowFullDescription] = useState(false);
 
+  let BtnAgregarFavoritos = <button 
+  type="button" className="btn btn-outline-primary">Agregar a Favoritos</button>;
   // Limitar la descripción a 20 caracteres o mostrarla completa según el estado
   const limitedDescription = showFullDescription
-    ? props.descripcion
-    : props.descripcion.slice(0, 20) + (props.descripcion.length > 20 ? '...' : '');
+    ? props.value.descripcion
+    : props.value.descripcion.slice(0, 20) + (props.value.descripcion.length > 20 ? '...' : '');
 
   // Función para alternar la visualización de la descripción completa
   const toggleDescription = () => {
@@ -25,12 +27,12 @@ function CardsProductos(props) {
 
   return (
     <div className="card" style={cardStyle}>
-      <img src={props.imagen} className="card-img-top" alt="..." style={imageStyle} />
+      <img src={props.value.imgprincipal} className="card-img-top" alt="..." style={imageStyle} />
       <div className="card-body">
-        <h5 className="card-title">{props.nombre}</h5>
+        <h5 className="card-title">{props.value.nombre}</h5>
         <p className="card-text">
           {limitedDescription}
-          {props.descripcion.length > 20 && (
+          {props.value.descripcion.length > 20 && (
             <button
               onClick={toggleDescription}
               className="btn btn-link p-0"
@@ -38,8 +40,11 @@ function CardsProductos(props) {
             >
               {showFullDescription ? 'Ver menos' : 'Ver más'}
             </button>
+
           )}
+
         </p>
+        <button className='btn btn-warning'>Favorito</button>
         <a href="#" className="card-link">Detalles</a>
       </div>
     </div>

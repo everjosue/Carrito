@@ -1,21 +1,19 @@
-import dataDatosProductos from "../data/DatosProductos";
+
 import CardsProductos from "./CardsProductos";
 function ListDatosProductos(props) {
-  let ListDatosProductos = dataDatosProductos.map(element => {
+  let listDatosProductosRendered = props.elements.map(element => {
     return (
       <CardsProductos
-        id={element.idproducto}
-        nombre={element.nombre}
-        descripcion={element.descripcion}
-        precio={element.precio}
-        imagen={element.imgprincipal}
+        key = {element.idproducto}
+        value = {element}
+        fnAgregarFavoritos={props.AgregarProductosAFavoritos}
       />
     );
   });
 
   return (
     <div className="container">
-      <div className="row">{ListDatosProductos}</div>
+      <div className="row">{listDatosProductosRendered}</div>
     </div>
   );
 

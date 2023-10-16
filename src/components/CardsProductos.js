@@ -43,8 +43,12 @@ function CardsProductos(props) {
 
           )}
 
+
+
         </p>
-        <button className='btn btn-warning'>Favorito</button>
+        <button onClick={()=>props.fnAgregarFavoritos(props.value)}
+           className='btn btn-warning'>Favorito</button>
+
         <a href="#" className="card-link">Detalles</a>
       </div>
     </div>

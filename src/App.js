@@ -14,7 +14,11 @@ function App() {
   {
     console.log("Agregando a favorito");
     console.log(element);
+    let tempListProductos = [...listDatosProductos];
+    tempListProductos.push(element);
+    setlistDatosProductos(tempListProductos);
   }
+  
   {/*const [searchQuery, setSearchQuery] = useState(""); // Estado para almacenar la consulta de búsqueda
   const [searchResults, setSearchResults] = useState([]); // Estado para almacenar los resultados de búsqueda
 

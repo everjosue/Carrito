@@ -6,8 +6,9 @@ function ListDatosProductos(props) {
       <CardsProductos
         key = {element.idproducto}
         value = {element}
-        fnAgregarFavoritos={props.AgregarProductosAFavoritos}
+        fnAgregarFavoritos={props.fnAgregarFavoritos}
       />
+      
     );
   });
 

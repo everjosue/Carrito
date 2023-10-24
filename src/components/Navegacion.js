@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
-import dataDatosProductos from '../data/DatosProductos'; // Importa los datos de productos
+import { useNavigate } from 'react-router-dom';
 
 const navStyle = {
-  zIndex: '1000', // Ajusta el z-index a un valor alto
+  zIndex: '1000',
 };
 
 function Navegacion() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
-    console.log('searchTerm:', event.target.value); // Agrega este console.log
   };
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    // Filtrar los productos que coinciden con el término de búsqueda
-    const filteredResults = dataDatosProductos.filter((producto) =>
-      producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(filteredResults);
+     console.log('Término de búsqueda:', searchTerm);
+    // Redirigir a la vista de resultados con el término de búsqueda
+    navigate(`/busqueda?search=${searchTerm}`);
   };
-
-  
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light position-fixed w-100" style={navStyle}>
@@ -35,14 +30,14 @@ function Navegacion() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">Inicio</a>
+              <a className="nav-link active" aria-current="page" href="/">Inicio</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">Link</a>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
+              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                Opciones
               </a>
               <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href="#">Action</a></li>
@@ -65,8 +60,8 @@ function Navegacion() {
               onChange={handleSearchChange}
             />
             <button className="btn btn-outline-success" type="submit">Buscar</button>
-            
           </form>
+
         </div>
       </div>
     </nav>

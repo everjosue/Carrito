@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import '../App.css';
 function CardsProductos(props) {
   const cardStyle = {
     width: '18rem',
@@ -46,10 +46,16 @@ function CardsProductos(props) {
 
 
         </p>
-        <button onClick={()=>props.fnAgregarFavoritos(props.value)}
-           className='btn btn-warning'>Favorito</button>
+        <div className="button-container">
+          <a href="#" className="card-link custom-detalles">Detalles</a>
+          <img
+            src="images/favorito.png" // Reemplaza con la ruta correcta de tu imagen
+            alt="Favorito"
+            onClick={() => props.fnAgregarFavoritos(props.value)}
+            style={{ cursor: 'pointer', width: '40px', marginLeft: '100px', marginTop: '10px' }} // Ajusta el margen superior según tu preferencia
+          />
+        </div>
 
-        <a href="#" className="card-link">Detalles</a>
       </div>
     </div>
   );

@@ -1,23 +1,37 @@
+import React, { useState, useEffect } from 'react';
+import CardsProductos from './CardsProductos';
+import axios from 'axios'; // Asegúrate de tener axios instalado
 
-import CardsProductos from "./CardsProductos";
 function ListDatosProductos(props) {
-  let listDatosProductosRendered = props.elements.map(element => {
-    return (
-      <CardsProductos
-        key = {element.idproducto}
-        value = {element}
-        fnAgregarFavoritos={props.fnAgregarFavoritos}
-      />
-      
-    );
-  });
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    // Realiza una solicitud GET a tu API para obtener la lista de productos
+    axios.get('http://localhost:5000/productos') // Reemplaza la URL con la dirección de tu API
+      .then(response => {
+        setProductos(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener productos:', error);
+      });
+  }, []);
+
+  // Resto del componente como lo tenías antes
+  // ...
 
   return (
     <div className="container">
-      <div className="row">{listDatosProductosRendered}</div>
+      <div className="row">
+        {productos.map(producto => (
+          <CardsProductos
+            key={producto.idproducto}
+            value={producto}
+            fnAgregarFavoritos={props.fnAgregarFavoritos}
+          />
+        ))}
+      </div>
     </div>
   );
-
 }
 
 export default ListDatosProductos;

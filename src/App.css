@@ -51,3 +51,44 @@ body {
   min-height: 100vh;
 }
 
+.multiline-text {
+  white-space: pre-line;
+  line-height: 40; /* Ajusta este valor según tus necesidades */
+}
+
+.favorito-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Ajusta el margen según tus necesidades */
+}
+
+
+
+.list-favoritos-containerr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Ajusta esto para centrar verticalmente en la altura deseada */
+}
+
+
+.custom-detalles {
+  color: #007bff; /* Color del texto */
+  text-decoration: none; /* Elimina el subrayado predeterminado */
+  padding: 4px 8px; /* Espacio interior alrededor del texto */
+  border: 1px solid #007bff; /* Borde alrededor del enlace */
+  border-radius: 4px; /* Bordes redondeados */
+  background-color: transparent; /* Fondo transparente */
+  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves de color y fondo */
+}
+
+.custom-link:hover {
+  background-color: #007bff; /* Cambio de color de fondo al pasar el mouse */
+  color: #fff; /* Cambio de color de texto al pasar el mouse */
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+}

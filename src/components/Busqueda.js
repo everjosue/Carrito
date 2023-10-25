@@ -51,6 +51,11 @@ function Busqueda() {
 
   return (
     <div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <h2>Resultados de la búsqueda</h2>
       <input
         type="text"

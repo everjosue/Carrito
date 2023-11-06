@@ -1,9 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
+import { Link } from 'react-router-dom';
 import ListFavoritos from './ListFavoritos'; 
 import Favorito from './Favorito';
 import '../App.js';
+import CrearProducto from './CrearProducto';
+
 
 const navStyle = {
   zIndex: '1000',
@@ -13,6 +16,7 @@ function Navegacion(props) {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const [isFavoritosVisible, setIsFavoritosVisible] = useState(true); // Estado para controlar la visibilidad de favoritos
+  const [isModalVisible, setIsModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -28,6 +32,15 @@ function Navegacion(props) {
   const handleToggleFavoritos = () => {
     setIsFavoritosVisible(!isFavoritosVisible);
   };
+
+  const handleOpenModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+  };
+
   
 
 
@@ -50,6 +63,7 @@ function Navegacion(props) {
   }, []);
 
   return (
+    <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light position-fixed w-100" style={navStyle}>
       <div className="container-fluid">
         <a className="navbar-brand" href="#">Carrito</a>
@@ -59,7 +73,9 @@ function Navegacion(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">Inicio</a>
+              <Link to="/" className="nav-link active" aria-current="page">
+               Inicio
+              </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">Link</a>
@@ -80,8 +96,9 @@ function Navegacion(props) {
                 </div>
               </li>
 
-
-              <li><a className="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <a className="dropdown-item" href="#" onClick={handleOpenModal}>Crear Producto</a>
+              </li>
               <li><hr className="dropdown-divider" /></li>
               <li><a className="dropdown-item" href="#">Something else here</a></li>
             </ul>
@@ -103,6 +120,8 @@ function Navegacion(props) {
             <button className="btn btn-outline-success" type="submit">Buscar</button>
           </form>
 
+
+
           
 
         </div>
@@ -111,6 +130,18 @@ function Navegacion(props) {
 
 
     </nav>
+
+    {isModalVisible && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close-button" onClick={handleCloseModal}>&times;</span>
+            <CrearProducto />
+          </div>
+        </div>
+      )}
+
+    </>
+
   );
 }
 

@@ -72,8 +72,13 @@ function App() {
 
 
                   <Route path="/" element={<React.Fragment>
+                    
                     <Saludo />
+                    <br />
+                    <br />
                     <Carrusel_Principal />
+                    <br />
+                    <br />
                     <ListDatosProductos
                       elements={listDatosProductos}
                       fnAgregarFavoritos={AgregarProductosAFavoritos}

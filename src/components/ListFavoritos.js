@@ -1,6 +1,5 @@
 import React from 'react';
 import Favorito from './Favorito';
- // Importa un archivo de CSS para los estilos
 import '../App.css';
 
 function ListFavoritos(props) {

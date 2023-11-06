@@ -70,7 +70,15 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh; /* Ajusta esto para centrar verticalmente en la altura deseada */
+  display: none;
 }
+
+
+
+.list-favoritos-container.visible {
+  display: block;
+}
+
 
 
 .custom-detalles {
@@ -92,3 +100,153 @@ body {
   display: flex;
   align-items: center;
 }
+
+
+/*Estilo del botn de encender o apagar favoritos*/
+
+/* Estilo del botón de encender o apagar favoritos */
+.form-check-input {
+  display: none; /* Oculta el input original */
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+}
+
+.switch-label {
+  cursor: pointer;
+  padding: 0 1rem; /* Añade espaciado alrededor del texto */
+}
+
+.switch {
+  width: 40px;
+  height: 20px;
+  background: grey;
+  border-radius: 20px;
+  position: relative;
+  margin-left: 5px; /* Ajusta el margen entre el texto y el switch */
+}
+
+.switch-circle {
+  content: '';
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.4s;
+  left: 0; /* Ajusta la posición inicial a 0 */
+}
+
+.form-check-input:checked + .switch-label + .switch .switch-circle {
+  left: calc(100% - 20px);
+}
+
+.form-check-input:checked + .switch-label + .switch {
+  background: #7ED957;
+  transition: background 0.4s; /* Agrega una transición para suavizar el cambio de color */
+}
+
+input:checked + label {
+  background: #7ED957;
+  transition: background 0.4s; /* Agrega una transición para suavizar el cambio de color */
+}
+
+/* ... Otros estilos ... */
+
+
+/* Estilos para los detalles del producto */
+.details-container {
+  margin: 20px;
+}
+
+.carousel-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Estilos para los detalles del producto */
+.product-details {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilos para el botón de regreso */
+.back-button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Agrega más estilos personalizados según tus necesidades */
+/* DetallesProducto.css */
+.details-container {
+  margin: 20px;
+}
+
+.botoninicio-button {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.product-details {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Otros estilos específicos para tu componente aquí */
+
+/* Estilos para el contenedor de detalles */
+.details-container {
+  border: 1px solid #ccc; /* Añade un borde al contenedor */
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px;
+}
+
+/* Estilos para el encabezado de detalles */
+.details-header {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+/* Estilos para la alineación del texto en el contenido del producto */
+.product-details {
+  text-align: left;
+}
+
+/* Estilos para los botones */
+.btn {
+  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para los enlaces */
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+

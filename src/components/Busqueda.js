@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import queryToString from 'query-string';
+import CardsProductos from './CardsProductos';
+import ListDatosProductos from './ListDatosProductos'; // Importa el componente ListDatosProductos
 
-function Busqueda() {
+function Busqueda({ AgregarProductosAFavoritos }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
@@ -51,28 +53,14 @@ function Busqueda() {
 
   return (
     <div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+
       <h2>Resultados de la búsqueda</h2>
-      <input
-        type="text"
-        placeholder="Buscar productos"
-        value={searchTerm}
-        onChange={handleSearchChange}
-      />
+
       {noResults ? (
         <p>No se encontraron resultados.</p>
       ) : (
-        <ul>
-          {searchResults.map((producto) => (
-            <li key={producto.idproducto}>
-              <strong>{producto.nombre}</strong> - {producto.descripcion}
-            </li>
-          ))}
-        </ul>
+        <ListDatosProductos resultadosBusqueda={searchResults} fnAgregarFavoritos={AgregarProductosAFavoritos} />
+
       )}
     </div>
   );

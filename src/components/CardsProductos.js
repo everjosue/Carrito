@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
 import '../App.css';
+import DetallesProducto from './DetallesProducto'; // Importa el componente DetallesProducto
+
 function CardsProductos(props) {
   const cardStyle = {
     width: '18rem',
-    margin: '10px' // Agregar margen para separar las tarjetas
+    margin: '10px'
   };
 
   const imageStyle = {
-    width: '200px', // Ancho fijo en píxeles
-    height: '150px' // Altura fija en píxeles
+    width: '200px',
+    height: '150px',
   };
 
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-  let BtnAgregarFavoritos = <button 
-  type="button" className="btn btn-outline-primary">Agregar a Favoritos</button>;
   // Limitar la descripción a 20 caracteres o mostrarla completa según el estado
   const limitedDescription = showFullDescription
     ? props.value.descripcion
@@ -40,22 +41,21 @@ function CardsProductos(props) {
             >
               {showFullDescription ? 'Ver menos' : 'Ver más'}
             </button>
-
           )}
-
-
-
         </p>
         <div className="button-container">
-          <a href="#" className="card-link custom-detalles">Detalles</a>
+          <Link to={`/detalle/${props.value.idproducto}`} className="card-link custom-detalles">
+            Detalles
+          </Link>
+          
+          
           <img
             src="images/favorito.png" // Reemplaza con la ruta correcta de tu imagen
             alt="Favorito"
             onClick={() => props.fnAgregarFavoritos(props.value)}
-            style={{ cursor: 'pointer', width: '40px', marginLeft: '100px', marginTop: '10px' }} // Ajusta el margen superior según tu preferencia
+            style={{ cursor: 'pointer', width: '40px', marginLeft: '100px', marginTop: '10px' }}
           />
         </div>
-
       </div>
     </div>
   );

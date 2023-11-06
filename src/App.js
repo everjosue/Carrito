@@ -9,11 +9,18 @@ import './App.css';
 import dataDatosProductos from './data/DatosProductos';
 import CrearProducto from './components/CrearProducto';
 import Busqueda from './components/Busqueda';
-import { SearchProvider } from './SearchContext'; // Importa el SearchProvider desde el archivo correcto
+import { SearchProvider } from './SearchContext';
+import DetallesProducto from './components/DetallesProducto'; // Importa el componente DetallesProducto
 
 function App() {
   const [listDatosProductos, setlistDatosProductos] = useState(dataDatosProductos);
   const [listDatosProductosFavoritos, setlistDatosProductosFavoritos] = useState([]);
+
+  const [favoritosVisible, setFavoritosVisible] = useState(false);
+
+  const handleToggleFavoritos = () => {
+    setFavoritosVisible(!favoritosVisible);
+  };
 
   function AgregarProductosAFavoritos(element) {
     console.log('Agregando a favorito');
@@ -42,30 +49,45 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navegacion />
+        <Navegacion
+          handleToggleFavoritos={handleToggleFavoritos}
+          favoritosVisible={favoritosVisible}
+          listDatosProductosFavoritos={listDatosProductosFavoritos}
+          eliminarFavorito={eliminarFavorito}
+        />
+      <br />
+      <br />
+      <br />
+      <br />
         <div className="container">
           <div className="row">
-            <div className="col-md-9">
-              <SearchProvider> {/* Agrega el SearchProvider aquí */}
+            <div className={favoritosVisible ? "col-md-9" : "col-md-12"}>
+              <SearchProvider>
+
                 <Routes>
-                  <Route path="/busqueda" element={<Busqueda />} />
+                  <Route path="/busqueda" element={<Busqueda AgregarProductosAFavoritos={AgregarProductosAFavoritos} />} />
+
+                  <Route path="/detalle/:IDproducto" element={<DetallesProducto />} />
+                  
+
+
                   <Route path="/" element={<React.Fragment>
                     <Saludo />
                     <Carrusel_Principal />
                     <ListDatosProductos
                       elements={listDatosProductos}
                       fnAgregarFavoritos={AgregarProductosAFavoritos}
+                      favoritosVisible={favoritosVisible}
                     />
                   </React.Fragment>} />
                 </Routes>
               </SearchProvider>
             </div>
             <div className="col-md-3">
-              <CrearProducto />
-              <ListFavoritos
-                elements={listDatosProductosFavoritos}
-                onEliminarFavorito={eliminarFavorito}
-              />
+              <br />
+              <br />
+              <br />
+              {favoritosVisible && <ListFavoritos elements={listDatosProductosFavoritos} onEliminarFavorito={eliminarFavorito} />}
             </div>
           </div>
         </div>

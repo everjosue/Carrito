@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../App.css';
+import ListFavoritos from './ListFavoritos'; 
+import Favorito from './Favorito';
+import '../App.js';
 
 const navStyle = {
   zIndex: '1000',
 };
 
-function Navegacion() {
+function Navegacion(props) {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+  const [isFavoritosVisible, setIsFavoritosVisible] = useState(true); // Estado para controlar la visibilidad de favoritos
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -19,6 +24,30 @@ function Navegacion() {
     // Redirigir a la vista de resultados con el término de búsqueda
     navigate(`/busqueda?search=${searchTerm}`);
   };
+
+  const handleToggleFavoritos = () => {
+    setIsFavoritosVisible(!isFavoritosVisible);
+  };
+  
+
+
+
+  useEffect(() => {
+    const switchInput = document.querySelector('.form-check-input');
+    const switchCircle = document.querySelector('.switch-circle');
+
+    if (switchInput && switchCircle) {
+      switchInput.addEventListener('change', function () {
+        if (switchInput.checked) {
+          switchCircle.style.left = 'calc(100% - 20px)';
+          setIsFavoritosVisible(true); // Mostrar favoritos cuando el interruptor está activado
+        } else {
+          switchCircle.style.left = '0px';
+          setIsFavoritosVisible(false); // Ocultar favoritos cuando el interruptor está desactivado
+        }
+      });
+    }
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light position-fixed w-100" style={navStyle}>
@@ -36,19 +65,31 @@ function Navegacion() {
               <a className="nav-link" href="#">Link</a>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                Opciones
-              </a>
-              <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="#">Action</a></li>
-                <li><a className="dropdown-item" href="#">Another action</a></li>
-                <li><hr className="dropdown-divider"></hr></li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>
+            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+              Opciones
+            </a>
+            <ul className="dropdown-menu">
+              <li className="d-flex align-items-center">
+                <a className="dropdown-item switch-label" href="#">Mostrar Favoritos</a>
+                <div className="switch-container">
+                  <input type="checkbox" id="switch" className="form-check-input" onChange={props.handleToggleFavoritos}/>
+                  <label htmlFor="switch" className="switch">
+                    <div className="switch-circle"></div>
+                  </label>
+                </div>
+              </li>
+
+
+              <li><a className="dropdown-item" href="#">Another action</a></li>
+              <li><hr className="dropdown-divider" /></li>
+              <li><a className="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+
           </ul>
           <form className="d-flex" onSubmit={handleSearchSubmit}>
             <input
@@ -62,10 +103,17 @@ function Navegacion() {
             <button className="btn btn-outline-success" type="submit">Buscar</button>
           </form>
 
+          
+
         </div>
       </div>
+
+
+
     </nav>
   );
 }
+
+
 
 export default Navegacion;

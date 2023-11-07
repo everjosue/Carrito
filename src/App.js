@@ -9,14 +9,37 @@ import './App.css';
 import dataDatosProductos from './data/DatosProductos';
 import CrearProducto from './components/CrearProducto';
 import Busqueda from './components/Busqueda';
+import DetallesProducto from './components/DetallesProducto';
 import { SearchProvider } from './SearchContext';
-import DetallesProducto from './components/DetallesProducto'; // Importa el componente DetallesProducto
+
+
+
+export const Context = React.createContext();
 
 function App() {
   const [listDatosProductos, setlistDatosProductos] = useState(dataDatosProductos);
   const [listDatosProductosFavoritos, setlistDatosProductosFavoritos] = useState([]);
 
+  const handleProductoCreado = (valor) => {
+    setProductoCreado(valor);
+  };
+
   const [favoritosVisible, setFavoritosVisible] = useState(false);
+
+    // Estado para controlar la visibilidad del modal
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [productoCreado, setProductoCreado] = useState(false);
+    
+
+    // Funciones para abrir y cerrar el modal
+    const handleOpenModal = () => {
+      setIsModalVisible(true);
+    };
+  
+    const handleCloseModal = () => {
+      setIsModalVisible(false);
+      setProductoCreado(true);
+    };
 
   const handleToggleFavoritos = () => {
     setFavoritosVisible(!favoritosVisible);
@@ -47,6 +70,7 @@ function App() {
   };
 
   return (
+    
     <Router>
       <div className="App">
         <Navegacion
@@ -54,7 +78,11 @@ function App() {
           favoritosVisible={favoritosVisible}
           listDatosProductosFavoritos={listDatosProductosFavoritos}
           eliminarFavorito={eliminarFavorito}
+          handleOpenModal={handleOpenModal} // Pasar la función para abrir el modal
+          onProductoCreado={handleProductoCreado}
         />
+
+        
       <br />
       <br />
       <br />
@@ -83,6 +111,7 @@ function App() {
                       elements={listDatosProductos}
                       fnAgregarFavoritos={AgregarProductosAFavoritos}
                       favoritosVisible={favoritosVisible}
+                      productoCreado={productoCreado}
                     />
                   </React.Fragment>} />
                 </Routes>
@@ -98,6 +127,7 @@ function App() {
         </div>
       </div>
     </Router>
+    
   );
 }
 

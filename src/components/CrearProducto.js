@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
-
+import { Context } from '../App';
 
 function CrearProducto(props) {
 
-
+    
+    const [productoCreado, setProductoCreado] = useState(false);
 
     const modalStyle = {
         position: 'fixed',
@@ -14,8 +15,8 @@ function CrearProducto(props) {
         backgroundColor: '#fff',
         padding: '50px',
         zIndex: '1000',
-        width: '80%',
-        height: '80%',
+        width: '400%',
+        height: '400%',
         overflow: 'auto',
     };
 
@@ -55,6 +56,11 @@ function CrearProducto(props) {
         setIsModalVisible(false);
     };
 
+    useEffect(() => {
+        console.log('Valor de productoCreado:', productoCreado);
+        
+    }, [productoCreado]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -71,7 +77,7 @@ function CrearProducto(props) {
         try {
             // Realiza una solicitud POST al servidor con los datos del nuevo producto
             const response = await axios.post('http://localhost:5000/CrearProductos', nuevoProducto);
-
+            
             // Maneja la respuesta del servidor, por ejemplo, redirige a otra página
             console.log('Producto creado exitosamente:', response.data);
 
@@ -84,20 +90,30 @@ function CrearProducto(props) {
             setImgprincipal('');
             setImagenes('');
             handleCloseModal();
+            setProductoCreado(true);
+
+       
         } catch (error) {
             // Maneja errores, por ejemplo, muestra un mensaje de error
             console.error('Error al crear el producto:', error);
         }
+            
+            
+        
+        
     };
 
     return (
-        <>
-        <button onClick={handleOpenModal}>Crear Producto</button>
+        <div>
 
-        {isModalVisible && (
-            <div style={overlayStyle}>
-                <div style={modalStyle}>
-                    <span style={closeButtonStyle} onClick={handleCloseModal}>&times;</span>
+
+            {productoCreado ? (
+                <div>
+                    <p>Producto agregado con éxito</p>
+                    <button onClick={props.handleCloseModal}>Cerrar</button>
+                </div>
+            ) : (
+
         <form className="border border-2 border-secondary p-2 rounded" onSubmit={handleSubmit}>
             <input placeholder="Nombre"
                 className="form-control mb-2"
@@ -137,11 +153,10 @@ function CrearProducto(props) {
             <input type="submit" className="btn btn-primary" value="Crear Producto" />
 
         </form>
-
+            )}
         </div>
-    </div>
-        )}
-        </>
+        
+
     );
 }
 

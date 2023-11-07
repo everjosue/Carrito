@@ -1,0 +1,6 @@
+import React from 'react';
+
+// Crea un nuevo Contexto de React
+const ProductoContext = React.createContext();
+
+export default ProductoContext;

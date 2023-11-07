@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import ListDatosProductos from './ListDatosProductos.js';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import ListFavoritos from './ListFavoritos'; 
@@ -17,6 +18,7 @@ function Navegacion(props) {
   const navigate = useNavigate();
   const [isFavoritosVisible, setIsFavoritosVisible] = useState(true); // Estado para controlar la visibilidad de favoritos
   const [isModalVisible, setIsModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
+  const [productoCreado, setProductoCreado] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -39,6 +41,8 @@ function Navegacion(props) {
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
+    setProductoCreado(prevState => !prevState); // Cambia el estado de productoCreado cada vez que se cierra el modal
+    props.onProductoCreado(!productoCreado); // Notifica a App.js sobre el cambio
   };
 
   
@@ -131,15 +135,33 @@ function Navegacion(props) {
 
     </nav>
 
-    {isModalVisible && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close-button" onClick={handleCloseModal}>&times;</span>
-            <CrearProducto />
+      {isModalVisible && (
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#fff',
+          padding: '50px',
+          zIndex: '1000',
+        }}>
+          <div>
+            <span style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              cursor: 'pointer',
+            }} onClick={handleCloseModal}>&times;</span>
+            <CrearProducto isModalVisible={isModalVisible} handleCloseModal={handleCloseModal} setProductoCreado={setProductoCreado} productoCreado={productoCreado}   />
+            
+            
+            
           </div>
+          
         </div>
       )}
 
+      
     </>
 
   );

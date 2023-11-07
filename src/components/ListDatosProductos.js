@@ -5,7 +5,10 @@ import axios from 'axios';
 function ListDatosProductos(props) {
   const [productos, setProductos] = useState([]);
 
+  
+
   useEffect(() => {
+    console.log('Valor de props.productoCreado:', props.productoCreado);
     if (props.resultadosBusqueda) {
       // Si se pasan resultados de búsqueda, usa esos resultados en lugar de cargar desde la API
       setProductos(props.resultadosBusqueda);
@@ -19,7 +22,7 @@ function ListDatosProductos(props) {
           console.error('Error al obtener productos:', error);
         });
     }
-  }, [props.resultadosBusqueda]);
+  }, [props.resultadosBusqueda, props.productoCreado]);
 
   return (
     <div className="container">

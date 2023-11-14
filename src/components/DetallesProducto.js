@@ -76,7 +76,6 @@ function DetallesProducto() {
         console.error('Error al eliminar el producto:', error);
       });
   };
-
   return (
     <div className="details-container">
       <div className="details-header">
@@ -87,12 +86,12 @@ function DetallesProducto() {
           Volver al Inicio
         </Link>
         <div className="botoninicio-button">
-          <button onClick={() => setMostrarModal(true)} style={{ marginRight: '10px' }}>
-            Eliminar Producto
-          </button>
-          <button onClick={handleShowModalActualizar} style={{ marginRight: '0px' }}>
-            Actualizar Producto
-          </button>
+        <button onClick={() => setMostrarModal(true)} style={{ marginRight: '10px', backgroundColor: 'red', color: 'white', border: 'none', borderRadius: '5px', padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>
+          Eliminar Producto
+        </button>
+        <button onClick={handleShowModalActualizar} style={{ marginRight: '0px', backgroundColor: 'green', color: 'white', border: 'none', borderRadius: '5px', padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>
+          Actualizar Producto
+        </button>
         </div>
       </div>
       <div className="content-container">
@@ -107,6 +106,18 @@ function DetallesProducto() {
         <div className="product-details">
           <h2>{producto.nombre}</h2>
           <p>
+            <strong>Modelo:</strong>
+            <br />
+            {producto.modelo}
+          </p>
+
+          <p>
+            <strong>Marca:</strong>
+            <br />
+            {producto.marca}
+          </p>
+          
+          <p>
             <strong>Descripción:</strong>
             <br />
             {producto.descripcion}
@@ -116,11 +127,7 @@ function DetallesProducto() {
             <br />
             ${producto.precio.toFixed(2)}
           </p>
-          <p>
-            <strong>Categoría:</strong>
-            <br />
-            {producto.categoria}
-          </p>
+
           {/* Puedes mostrar más detalles del producto aquí */}
         </div>
       </div>

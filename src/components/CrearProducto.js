@@ -107,12 +107,14 @@ function CrearProducto(props) {
         <div>
 
 
-            {productoCreado ? (
-                <div>
-                    <p>Producto agregado con éxito</p>
-                    <button onClick={props.handleCloseModal}>Cerrar</button>
-                </div>
-            ) : (
+        {productoCreado ? (
+            <div>
+                <p>Producto agregado con éxito</p>
+                <button onClick={props.handleCloseModal} style={{ backgroundColor: 'purple', color: 'white', border: 'none', borderRadius: '5px', padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>
+                    Cerrar
+                </button>
+            </div>
+        ) : (
 
         <form className="border border-2 border-secondary p-2 rounded" onSubmit={handleSubmit}>
             <input placeholder="Nombre"
